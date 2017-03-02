@@ -1,5 +1,7 @@
 #Scala Exercises - Monocle
 
+This repository hosts a template content library for the [Scala Exercises](https://www.scala-exercises.org/) platform, including interactive exercises related to the [Monocle](https://github.com/julien-truffaut/Monocle) optics library for Scala (and [Scala.js](https://www.scala-js.org/)).
+
 ------------------------
 
 
@@ -41,8 +43,6 @@ evaluator.secretKey="secretKey"
 ~~~ sh
 sbt -mem 1500 run
 ~~~
-
-This repository hosts a template content library for the [Scala Exercises](https://www.scala-exercises.org/) platform, including interactive exercises related to the [Monocle](https://github.com/julien-truffaut/Monocle) optics library for Scala (and [Scala.js](https://www.scala-js.org/)).
 
 ## About Scala exercises
 
