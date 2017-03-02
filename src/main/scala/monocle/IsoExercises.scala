@@ -137,5 +137,24 @@ object IsoExercises extends FlatSpec with Matchers with Section {
 
   }
 
+  /**
+    * Be aware that whitebox macros are not supported by all IDEs.
+    *
+    * == Laws ==
+    *
+    * An `Iso` must satisfy all properties defined in `IsoLaws` from the core module. You can check the validity of your own `Iso` using `IsoTests` from the law module.
+    *
+    * In particular, an Iso must verify that `get` and `reverseGet` are inverse. This is done via `roundTripOneWay` and `roundTripOtherWay` laws:
+    *
+    * {{{
+    *   def roundTripOneWay[S, A](i: Iso[S, A], s: S): Boolean =
+    *     i.reverseGet(i.get(s)) == s
+    *
+    *     def roundTripOtherWay[S, A](i: Iso[S, A], a: A): Boolean =
+    *     i.get(i.reverseGet(a)) == a
+    * }}}
+    */
+  def conclusion(): Unit = ()
+
 
 }
