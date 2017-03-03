@@ -1,6 +1,6 @@
 package monocleex
 
-import monocle.{OptionalExercises, PrismExercises, IsoExercises}
+import monocle.{TraversalExercises, OptionalExercises, PrismExercises, IsoExercises}
 import org.scalaexercises.definitions._
 
 /** Monocle is an optics library for Scala (and Scala.js) strongly inspired by Haskell Lens.
@@ -18,7 +18,8 @@ object MonocleLib extends Library {
     IsoExercises,
     LensExercises,
     PrismExercises,
-    OptionalExercises
+    OptionalExercises,
+    TraversalExercises
   )
   override def logoPath = "monocle"
 }
