@@ -154,6 +154,7 @@ object IsoExercises extends FlatSpec with Matchers with Section {
     *     i.get(i.reverseGet(a)) == a
     * }}}
     */
+  def conclusion(): Unit = ()
 
 
 }

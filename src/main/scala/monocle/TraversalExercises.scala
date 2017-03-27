@@ -145,6 +145,7 @@ object TraversalExercises extends FlatSpec with Matchers with Section {
     *     t.modify(g)(t.modify(f)(s)) == t.modify(g compose f)(s)
     * }}}
     */
+  def conclusion(): Unit = ()
 
 
 }

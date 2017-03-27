@@ -128,6 +128,7 @@ object OptionalExercises extends FlatSpec with Matchers with Section {
     *
     * `setGetOption` states that if you `set` a value, you always `getOption` the same value back.
     */
+  def conclusion(): Unit = ()
 
 
 }
