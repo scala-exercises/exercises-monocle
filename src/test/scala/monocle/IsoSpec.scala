@@ -63,6 +63,7 @@ class IsoSpec extends FunSuite with Checkers {
       )
     )
   }
+
   test("exercise laws") {
     check(
      Test.testSuccess(

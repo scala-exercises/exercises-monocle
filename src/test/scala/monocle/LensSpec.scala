@@ -56,4 +56,12 @@ class LensSpec extends FunSuite with Checkers {
     )
   }
 
+  test("exercise laws") {
+    check(
+      Test.testSuccess(
+        IsoExercises.exerciseLaws _,
+        true :: true:: HNil
+      )
+    )
+  }
 }

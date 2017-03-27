@@ -1,6 +1,8 @@
-package monocleex
+package monocle
 
 
+import monocle.{Iso, Lens}
+import monocle.IsoHelper.{Person, personToTuple}
 import org.scalatest._
 import org.scalaexercises.definitions._
 import monocle.macros.GenLens
@@ -144,18 +146,21 @@ object LensExercises extends FlatSpec with Matchers with Section {
       *
       * In particular, a Lens must respect the `getSet` law which states that if you get a value `A` from `S` and set it back in, the result is an object identical to the original one. A side effect of this law is that set must only update the `A` it points to, for example it cannot increment a counter or modify another value.
       *
-      * {{{
-      *   def getSet[S, A](l: Lens[S, A], s: S): Boolean =
-      *     l.set(l.get(s))(s) == s
-      * }}}
-      *
       * On the other hand, the `setGet` law states that if you `set` a `value`, you always `get` the same value back. This law guarantees that `set` is actually updating a value `A` inside of `S`.
       *
-      * {{{
-      *   def setGet[S, A](l: Lens[S, A], s: S, a: A): Boolean =
-      *     l.get(l.set(a)(s)) == a
-      * }}}
       */
-    def conclusion(): Unit = ()
+    def exerciseLaws(res0 : Boolean, res1 : Boolean) =
+    {
+      val streetNumber = Lens[Address, Int](_.streetNumber)(n => a => a.copy(streetNumber = n))
 
+         def getSet[S, A](l: Lens[S, A], s: S): Boolean =
+           l.set(l.get(s))(s) == s
+
+         def setGet[S, A](l: Lens[S, A], s: S, a: A): Boolean =
+           l.get(l.set(a)(s)) == a
+
+      getSet(streetNumber) should be res0
+
+      getSet(streetNumber) should be res1
+    }
 }
