@@ -156,6 +156,5 @@ object LensExercises extends FlatSpec with Matchers with Section {
       *     l.get(l.set(a)(s)) == a
       * }}}
       */
-    def conclusion(): Unit = ()
 
 }

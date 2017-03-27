@@ -188,7 +188,6 @@ object PrismExercises extends FlatSpec with Matchers with Section {
     *     p.getOption(p.reverseGet(a)) == Some(a)
     * }}}
     */
-  def conclusion(): Unit = ()
 
 
 }
