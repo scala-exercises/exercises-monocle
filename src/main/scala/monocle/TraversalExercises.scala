@@ -138,7 +138,6 @@ object TraversalExercises extends FlatSpec with Matchers with Section {
   def exerciseLaws(res0 : Boolean, res1 : Boolean) =
   {
 
-    val eachL = Traversal.fromTraverse[List, Int]
 
      def modifyGetAll[S, A](t: Traversal[S, A], s: S, f: A => A): Boolean =
          t.getAll(t.modify(f)(s)) == t.getAll(s).map(f)
