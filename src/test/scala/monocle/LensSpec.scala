@@ -1,7 +1,7 @@
 package monocle
 
 import monocleex.LensExercises
-import monocleex.LensHelper.{Person, Address}
+import monocleex.LensHelper.{Address, Person}
 import org.scalacheck.Shapeless._
 import org.scalaexercises.Test
 import org.scalatest.FunSuite
@@ -59,7 +59,7 @@ class LensSpec extends FunSuite with Checkers {
   test("exercise laws") {
     check(
       Test.testSuccess(
-        IsoExercises.exerciseLaws _,
+        LensExercises.exerciseLaws _,
         true :: true:: HNil
       )
     )

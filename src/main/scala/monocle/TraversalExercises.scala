@@ -21,7 +21,6 @@ object TraversalHelper {
   import scalaz.syntax.traverse._
   import scalaz.syntax.applicative._
 
-
   def filterKey[K, V](predicate: K => Boolean): Traversal[Map[K, V], V] =
     new Traversal[Map[K, V], V]{
       def modifyF[F[_]: Applicative](f: V => F[V])(s: Map[K, V]): F[Map[K, V]] =
@@ -133,19 +132,26 @@ object TraversalExercises extends FlatSpec with Matchers with Section {
     *
     * In particular, a `Traversal` must respect the `modifyGetAll` law which checks that you can modify all elements targeted by a `Traversal`
     *
-    * {{{
-    *   def modifyGetAll[S, A](t: Traversal[S, A], s: S, f: A => A): Boolean =
-    *     t.getAll(t.modify(f)(s)) == t.getAll(s).map(f)
-    * }}}
-    *
     * Another important `law` is `composeModify` also known as fusion law:
     *
-    * {{{
-    *   def composeModify[S, A](t: Traversal[S, A], s: S, f: A => A, g: A => A): Boolean =
-    *     t.modify(g)(t.modify(f)(s)) == t.modify(g compose f)(s)
-    * }}}
     */
-  def conclusion(): Unit = ()
+  def exerciseLaws(res0 : Boolean, res1 : Boolean) =
+  {
+
+    val eachL = Traversal.fromTraverse[List, Int]
+
+     def modifyGetAll[S, A](t: Traversal[S, A], s: S, f: A => A): Boolean =
+         t.getAll(t.modify(f)(s)) == t.getAll(s).map(f)
+
+
+     def composeModify[S, A](t: Traversal[S, A], s: S, f: A => A, g: A => A): Boolean =
+         t.modify(g)(t.modify(f)(s)) == t.modify(g compose f)(s)
+
+    modifyGetAll(eachL,List(1,2,3),(x:Int)=>x+1) should be (res0)
+
+    composeModify(eachL, List(1,2,3),(x:Int)=>x+1,(y:Int)=>y+2) should be (res1)
+
+  }
 
 
 }

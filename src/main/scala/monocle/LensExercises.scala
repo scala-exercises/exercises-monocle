@@ -1,17 +1,16 @@
-package monocle
+package monocleex
 
 
-import monocle.{Iso, Lens}
-import monocle.IsoHelper.{Person, personToTuple}
-import org.scalatest._
-import org.scalaexercises.definitions._
+import monocle.Lens
 import monocle.macros.GenLens
+import org.scalaexercises.definitions._
+import org.scalatest._
 
 object LensHelper {
-  case class Address(streetNumber: Int, streetName: String)
+  case class Address(strNumber : Int, streetName : String)
 
   val address = Address(10, "High Street")
-  val streetNumber = GenLens[Address](_.streetNumber)
+  val streetNumber = GenLens[Address](_.strNumber)
 
   def neighbors(n: Int): List[Int] =
     if(n > 0) List(n - 1, n + 1) else List(n + 1)
@@ -30,23 +29,23 @@ object LensHelper {
   *
   * Let’s take a simple case class with two fields:
   * {{{
-  *   case class Address(streetNumber: Int, streetName: String)
+  *   case class Address(strNumber: Int, streetName: String)
   * }}}
   *
-  * We can create a `Lens[Address, Int]` which zooms from an `Address` to its field `streetNumber` by supplying a pair of functions:
+  * We can create a `Lens[Address, Int]` which zooms from an `Address` to its field `strNumber` by supplying a pair of functions:
   *
   *  - `get: Address => Int`
   *  - `set: Int => Address => Address`
   *
   * {{{
   *   import monocle.Lens
-  *   val streetNumber = Lens[Address, Int](_.streetNumber)(n => a => a.copy(streetNumber = n))
+  *   val strNumber = Lens[Address, Int](_.strNumber)(n => a => a.copy(strNumber = n))
   * }}}
   *
   * This case is really straightforward so we automated the generation of `Lenses` from case classes using a macro:
   * {{{
   *   import monocle.macros.GenLens
-  *   val streetNumber = GenLens[Address](_.streetNumber)
+  *   val strNumber = GenLens[Address](_.strNumber)
   * }}}
   *
   * @param name lens
@@ -105,7 +104,7 @@ object LensExercises extends FlatSpec with Matchers with Section {
       *   def updateNumber(n: Int): Future[Int] = Future.successful(n + 1)
       * }}}
       * {{{
-      *   streetNumber.modifyF(updateNumber)(address)
+      *   strNumber.modifyF(updateNumber)(address)
       *   // res9: scala.concurrent.Future[Address] = Future(<not completed>)
       * }}}
       *
@@ -151,7 +150,7 @@ object LensExercises extends FlatSpec with Matchers with Section {
       */
     def exerciseLaws(res0 : Boolean, res1 : Boolean) =
     {
-      val streetNumber = Lens[Address, Int](_.streetNumber)(n => a => a.copy(streetNumber = n))
+      val streetNumber = Lens[Address, Int](_.strNumber)(n => a => a.copy(strNumber = n))
 
          def getSet[S, A](l: Lens[S, A], s: S): Boolean =
            l.set(l.get(s))(s) == s
@@ -159,8 +158,8 @@ object LensExercises extends FlatSpec with Matchers with Section {
          def setGet[S, A](l: Lens[S, A], s: S, a: A): Boolean =
            l.get(l.set(a)(s)) == a
 
-      getSet(streetNumber) should be res0
+      getSet(streetNumber,address) should be (res0)
 
-      getSet(streetNumber) should be res1
+      setGet(streetNumber,address,20) should be (res1)
     }
 }

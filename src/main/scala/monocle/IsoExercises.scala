@@ -157,9 +157,9 @@ object IsoExercises extends FlatSpec with Matchers with Section {
 	  def roundTripOtherWay[S, A](i: Iso[S, A], a: A): Boolean =
 		  i.get(i.reverseGet(a)) == a
 
-	  roundTripOneWay(personToTuple, Person("Zoey",25)) should be res0
+	  roundTripOneWay(personToTuple, Person("Zoey",25)) should be (res0)
 
-	  roundTripOtherWay(personToTuple,("Zoe",52)) should be res1
+	  roundTripOtherWay(personToTuple,("Zoe",52)) should be (res1)
   }
 
 

@@ -46,4 +46,14 @@ class OptionalSpec extends FunSuite with Checkers {
       )
     )
   }
+
+
+  test("exercise laws") {
+  check(
+    Test.testSuccess(
+        OptionalExercises.exerciseLaws _,
+        true :: true:: HNil
+      )
+    )
+  }
 }

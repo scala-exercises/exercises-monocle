@@ -1,7 +1,7 @@
 package monocle
 
-import org.scalatest._
 import org.scalaexercises.definitions._
+import org.scalatest._
 
 
 object PrismHelper {
@@ -177,18 +177,25 @@ object PrismExercises extends FlatSpec with Matchers with Section {
     *
     * In particular, a `Prism` must verify that `getOption` and `reverseGet` allow a full round trip if the Prism matches i.e. if `getOption` returns a `Some`.
     *
-    * {{{
-    *   def partialRoundTripOneWay[S, A](p: Prism[S, A], s: S): Boolean =
-    *     p.getOption(s) match {
-    *       case None    => true // nothing to prove
-    *       case Some(a) => p.reverseGet(a) == s
-    *    }
     *
-    *   def partialRoundTripOneWay[S, A](p: Prism[S, A], a: A): Boolean =
-    *     p.getOption(p.reverseGet(a)) == Some(a)
-    * }}}
     */
-  def conclusion(): Unit = ()
+    def exerciseLaws(res0 : Boolean, res1 : Boolean) =
+    {
+      val jStr = Prism.partial[Json, String]{case JStr(v) => v}(JStr)
 
+      def partialRoundTripOneWay[S, A](p: Prism[S, A], s: S): Boolean =
+           p.getOption(s) match {
+           case None    => true // nothing to prove
+               case Some(a) => p.reverseGet(a) == s
+            }
+
+      def partialRoundTripOtherWay[S, A](p: Prism[S, A], a: A): Boolean =
+        p.getOption(p.reverseGet(a)) == Some(a)
+
+      partialRoundTripOneWay(jStr,JStr("Hi")) should be (res0)
+
+      partialRoundTripOtherWay(jStr, "Hi") should be (res1)
+
+    }
 
 }

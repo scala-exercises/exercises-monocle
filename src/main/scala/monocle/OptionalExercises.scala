@@ -1,7 +1,8 @@
 package monocle
 
-import org.scalatest._
+import monocle.law.OptionalLaws
 import org.scalaexercises.definitions._
+import org.scalatest._
 
 
 object OptionalHelper {
@@ -111,24 +112,39 @@ object OptionalExercises extends FlatSpec with Matchers with Section {
   /**
     * == Laws ==
     *
-    * {{{
-    *  class OptionalLaws[S, A](optional: Optional[S, A]) {
-    *
-    *   def getOptionSet(s: S): Boolean =
-    *     optional.getOrModify(s).fold(identity, optional.set(_)(s)) == s
-    *
-    *   def setGetOption(s: S, a: A): Boolean =
-    *     optional.getOption(optional.set(a)(s)) == optional.getOption(s).map(_ => a)
-    *   }
-    * }}}
-    *
     * An `Optional` must satisfy all properties defined in `OptionalLaws` in core module. You can check the validity of your own `Optional` using `OptionalTests` in law module.
     *
     * `getOptionSet` states that if you `getOrModify` a value `A` from `S` and then `set` it back in, the result is an object identical to the original one.
     *
     * `setGetOption` states that if you `set` a value, you always `getOption` the same value back.
     */
-  def conclusion(): Unit = ()
+    def exerciseLaws(res0 : Boolean, res1 : Boolean) =
+    {
+      val head = Optional[List[Int], Int] {
+          case Nil => None
+          case x :: xs => Some(x)
+        }
+        {
+          a => {
+            case Nil => Nil
+            case x :: xs => a :: xs
+          }
+        }
+      class OptionalLaws[S, A](optional: Optional[S, A]) {
+
+         def getOptionSet(s: S): Boolean =
+           optional.getOrModify(s).fold(identity, optional.set(_)(s)) == s
+
+         def setGetOption(s: S, a: A): Boolean =
+           optional.getOption(optional.set(a)(s)) == optional.getOption(s).map(_ => a)
+
+      }
+      new OptionalLaws(head).getOptionSet(List(1,2,3)) should be (res0)
+
+      new OptionalLaws(head).setGetOption(List(1,2,3),20) should be (res1)
+
+    }
+
 
 
 }

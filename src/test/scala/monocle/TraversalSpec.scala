@@ -47,4 +47,12 @@ class TraversalSpec extends FunSuite with Checkers {
     )
   }
 
+  test("exercise laws") {
+    check(
+      Test.testSuccess(
+          TraversalExercises.exerciseLaws _,
+          true :: true:: HNil
+        )
+      )
+    }
 }
