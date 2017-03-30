@@ -1,6 +1,6 @@
-val scalaExercicesV = "0.4.0-SNAPSHOT"
+val scalaExercisesV = "0.4.0-SNAPSHOT"
 
-def dep(artifactId: String) = "org.scala-exercises" %% artifactId % scalaExercicesV
+def dep(artifactId: String) = "org.scala-exercises" %% artifactId % scalaExercisesV
 
 lazy val monocle = (project in file("."))
 .enablePlugins(ExerciseCompilerPlugin)
