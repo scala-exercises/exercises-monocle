@@ -1,5 +1,9 @@
-package monocle
+/*
+ * scala-exercises - exercises-monocle
+ * Copyright (C) 2015-2016 47 Degrees, LLC. <http://www.47deg.com>
+ */
 
+package monocle
 
 import monocle.TraversalHelper.Point
 import org.scalacheck.Shapeless._
@@ -7,7 +11,6 @@ import org.scalaexercises.Test
 import org.scalatest.FunSuite
 import org.scalatest.prop.Checkers
 import shapeless.HNil
-
 
 class TraversalSpec extends FunSuite with Checkers {
 
@@ -33,7 +36,7 @@ class TraversalSpec extends FunSuite with Checkers {
     check(
       Test.testSuccess(
         TraversalExercises.exerciseSmartConstruct _,
-        Point("bottom-left",5,5) :: HNil
+        Point("bottom-left", 5, 5) :: HNil
       )
     )
   }
@@ -50,9 +53,9 @@ class TraversalSpec extends FunSuite with Checkers {
   test("exercise laws") {
     check(
       Test.testSuccess(
-          TraversalExercises.exerciseLaws _,
-          true :: true:: HNil
-        )
+        TraversalExercises.exerciseLaws _,
+        true :: true :: HNil
       )
-    }
+    )
+  }
 }

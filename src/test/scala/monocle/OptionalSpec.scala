@@ -1,3 +1,8 @@
+/*
+ * scala-exercises - exercises-monocle
+ * Copyright (C) 2015-2016 47 Degrees, LLC. <http://www.47deg.com>
+ */
+
 package monocle
 
 import org.scalacheck.Shapeless._
@@ -7,7 +12,6 @@ import org.scalatest.prop.Checkers
 import shapeless.HNil
 
 import scalaz.{-\/, \/-}
-
 
 class OptionalSpec extends FunSuite with Checkers {
 
@@ -33,7 +37,7 @@ class OptionalSpec extends FunSuite with Checkers {
     check(
       Test.testSuccess(
         OptionalExercises.exerciseModify _,
-        List(2, 2, 3) :: List.empty[Int] ::HNil
+        List(2, 2, 3) :: List.empty[Int] :: HNil
       )
     )
   }
@@ -42,17 +46,16 @@ class OptionalSpec extends FunSuite with Checkers {
     check(
       Test.testSuccess(
         OptionalExercises.exerciseModifyOption _,
-        Option(List(2, 2, 3)) :: Option.empty[List[Int]] ::HNil
+        Option(List(2, 2, 3)) :: Option.empty[List[Int]] :: HNil
       )
     )
   }
 
-
   test("exercise laws") {
-  check(
-    Test.testSuccess(
+    check(
+      Test.testSuccess(
         OptionalExercises.exerciseLaws _,
-        true :: true:: HNil
+        true :: true :: HNil
       )
     )
   }
