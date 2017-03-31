@@ -1,17 +1,35 @@
-*.class
-*.log
+project/project
+project/target
+target
+.idea
+.tmp
 
-# sbt specific
-.cache
-.history
-.lib/
-dist/*
-target/
-lib_managed/
-src_managed/
-project/boot/
-project/plugins/project/
+*.iml
+/out
+.idea_modules
+.classpath
+.project
+/RUNNING_PID
+.settings
+.sass-cache
+scalajvm/upload/*
 
-# Scala-IDE specific
+# temp files
+.~*
+*~
+*.orig
+
+# eclipse
 .scala_dependencies
-.worksheet
+.buildpath
+.cache
+.target
+bin/
+.ensime
+.ensime_cache
+
+# OSX
+.DS_Store
+
+# PGP keys
+secring.gpg

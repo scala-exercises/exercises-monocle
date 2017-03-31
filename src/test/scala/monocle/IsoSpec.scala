@@ -1,3 +1,8 @@
+/*
+ * scala-exercises - exercises-monocle
+ * Copyright (C) 2015-2016 47 Degrees, LLC. <http://www.47deg.com>
+ */
+
 package monocle
 
 import monocle.IsoHelper.Person
@@ -6,7 +11,6 @@ import org.scalaexercises.Test
 import org.scalatest.FunSuite
 import org.scalatest.prop.Checkers
 import shapeless.HNil
-
 
 class IsoSpec extends FunSuite with Checkers {
 
@@ -64,4 +68,12 @@ class IsoSpec extends FunSuite with Checkers {
     )
   }
 
+  test("exercise laws") {
+    check(
+      Test.testSuccess(
+        IsoExercises.exerciseLaws _,
+        true :: true :: HNil
+      )
+    )
+  }
 }

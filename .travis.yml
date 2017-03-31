@@ -5,3 +5,13 @@ jdk:
   - oraclejdk8
 script:
   - sbt test
+
+before_install:
+- if [ "$TRAVIS_BRANCH" = "master" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then
+  openssl aes-256-cbc -K $encrypted_63e72280e5f7_key -iv $encrypted_63e72280e5f7_iv -in secring.gpg.enc -out secring.gpg -d;
+  fi
+
+after_success:
+- if [ "$TRAVIS_BRANCH" = "master" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then
+     sbt compile publishSigned;
+  fi

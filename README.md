@@ -1,4 +1,4 @@
-#Scala Exercises - Monocle
+# Scala Exercises - Monocle
 
 This repository hosts a template content library for the [Scala Exercises](https://www.scala-exercises.org/) platform, including interactive exercises related to the [Monocle](https://github.com/julien-truffaut/Monocle) optics library for Scala (and [Scala.js](https://www.scala-js.org/)).
 
@@ -44,7 +44,7 @@ evaluator.secretKey="secretKey"
 sbt -mem 1500 run
 ~~~
 
-## About Scala exercises
+## About Scala exercises
 
 "Scala Exercises" brings exercises for the Stdlib, Cats, Shapeless and many other great libraries for Scala to your browser. Offering hundreds of solvable exercises organized into several categories covering the basics of the Scala language and it's most important libraries.
 
@@ -55,7 +55,7 @@ Scala Exercises is available at [scala-exercises.org](https://scala-exercises.or
 Contributions welcome! Please join our [Gitter channel](https://gitter.im/scala-exercises/scala-exercises)
 to get involved, or visit our [GitHub site](https://github.com/scala-exercises).
 
-##License
+## License
 
 Copyright (C) 2015-2016 47 Degrees, LLC.
 Reactive, scalable software solutions.
