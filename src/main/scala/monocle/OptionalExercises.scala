@@ -79,7 +79,7 @@ object OptionalExercises extends FlatSpec with Matchers with Section {
    *   head.getOrModify(xs)
    *     // res2: scalaz.\/[List[Int],Int] = \/-(1)
    *
-   *   head.nonEmpty(ys)
+   *   head.getOrModify(ys)
    *     // res3: scalaz.\/[List[Int],Int] = -\/(List())
    * }}}
    *
