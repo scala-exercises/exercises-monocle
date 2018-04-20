@@ -43,13 +43,13 @@ object LensHelper {
  *
  * {{{
  *   import monocle.Lens
- *   val strNumber = Lens[Address, Int](_.strNumber)(n => a => a.copy(strNumber = n))
+ *   val streetNumber = Lens[Address, Int](_.strNumber)(n => a => a.copy(strNumber = n))
  * }}}
  *
  * This case is really straightforward so we automated the generation of `Lenses` from case classes using a macro:
  * {{{
  *   import monocle.macros.GenLens
- *   val strNumber = GenLens[Address](_.strNumber)
+ *   val streetNumber = GenLens[Address](_.strNumber)
  * }}}
  *
  * @param name lens
@@ -65,7 +65,6 @@ object LensExercises extends FlatSpec with Matchers with Section {
    * }}}
    */
   def exerciseGetAndSet(res0: Int, res1: Address) = {
-
     streetNumber.get(address) should be(res0)
     streetNumber.set(5)(address) should be(res1)
   }
@@ -121,7 +120,6 @@ object LensExercises extends FlatSpec with Matchers with Section {
    * }}}
    */
   def exerciseComposeLens(res0: Int, res1: Person) = {
-
     (addressLens composeLens streetNumber).get(john) should be(res0)
     (addressLens composeLens streetNumber).set(2)(john) should be(res1)
   }
