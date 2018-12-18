@@ -85,12 +85,11 @@ object LensExercises extends FlatSpec with Matchers with Section {
    * {{{
    *   def neighbors(n: Int): List[Int] =
    *   if(n > 0) List(n - 1, n + 1) else List(n + 1)
-   *
-   *   import scalaz.std.list._ // to get Functor[List] instance
    * }}}
    */
   def exerciseModifyF(res0: List[Address], res1: List[Address]) = {
     import scalaz.std.list._ // to get Functor[List] instance
+    
     streetNumber.modifyF(neighbors)(address) should be(res0)
     streetNumber.modifyF(neighbors)(Address(135, "High Street")) should be(res1)
   }
