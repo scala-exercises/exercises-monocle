@@ -1,16 +1,17 @@
 /*
- * scala-exercises - exercises-monocle
- * Copyright (C) 2015-2016 47 Degrees, LLC. <http://www.47deg.com>
+ *  scala-exercises - exercises-monocle
+ *  Copyright (C) 2015-2019 47 Degrees, LLC. <http://www.47deg.com>
+ *
  */
 
-package monocle
+package monoclelib
 
-import monocle.PrismHelper.{JNum, JStr, Json}
+import PrismHelper.{JNum, JStr}
 import org.scalaexercises.Test
 import org.scalatest.FunSuite
-import org.scalatest.prop.Checkers
+import org.scalatestplus.scalacheck.Checkers
 
-import org.scalacheck.Shapeless._
+import org.scalacheck.ScalacheckShapeless._
 import shapeless.HNil
 
 class PrismSpec extends FunSuite with Checkers {

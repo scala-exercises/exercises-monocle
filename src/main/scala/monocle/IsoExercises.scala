@@ -1,10 +1,12 @@
 /*
- * scala-exercises - exercises-monocle
- * Copyright (C) 2015-2016 47 Degrees, LLC. <http://www.47deg.com>
+ *  scala-exercises - exercises-monocle
+ *  Copyright (C) 2015-2019 47 Degrees, LLC. <http://www.47deg.com>
+ *
  */
 
-package monocle
+package monoclelib
 
+import monocle.Iso
 import monocle.macros.GenIso
 import org.scalatest._
 import org.scalaexercises.definitions._
@@ -32,7 +34,7 @@ object IsoHelper {
  *
  * An [[http://julien-truffaut.github.io/Monocle/optics/iso.html `Iso`]] is an optic which converts elements of type `S` into elements of type `A` without loss.
  *
- * Consider a case class Person with two fields:
+ * Consider a case class `Person` with two fields:
  *
  * {{{
  *   case class Person(name: String, age: Int)
@@ -96,7 +98,9 @@ object IsoExercises extends FlatSpec with Matchers with Section {
     stringToList.modify(_.tail)("Hello") should be(res0)
 
   /**
-   * We defined several macros to simplify the generation of Iso between a case class and its Tuple equivalent. All macros are defined in a separate module (see modules).
+   * = Iso Generation =
+   *
+   * We defined several macros to simplify the generation of `Iso` between a case class and its `Tuple` equivalent. All macros are defined in a separate module (see modules).
    * {{{
    *     case class MyString(s: String)
    *     case class Foo()

@@ -1,3 +1,6 @@
-resolvers ++= Seq(Resolver.sonatypeRepo("snapshots"))
-addSbtPlugin("org.scala-exercises" % "sbt-exercise" % "0.4.0-SNAPSHOT", "0.13", "2.10")
-addSbtPlugin("com.47deg"         % "sbt-org-policies" % "0.5.13")
+resolvers ++= Seq(
+  Resolver.sonatypeRepo("snapshots")
+)
+
+addSbtPlugin("org.scala-exercises" % "sbt-exercise"     % "0.5.0-SNAPSHOT")
+addSbtPlugin("com.47deg"           % "sbt-org-policies" % "0.12.0-M3")

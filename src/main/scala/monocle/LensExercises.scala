@@ -1,12 +1,14 @@
 /*
- * scala-exercises - exercises-monocle
- * Copyright (C) 2015-2016 47 Degrees, LLC. <http://www.47deg.com>
+ *  scala-exercises - exercises-monocle
+ *  Copyright (C) 2015-2019 47 Degrees, LLC. <http://www.47deg.com>
+ *
  */
 
-package monocleex
+package monoclelib
 
 import monocle.Lens
 import monocle.macros.GenLens
+import monocle.macros.Lenses
 import org.scalaexercises.definitions._
 import org.scalatest._
 
@@ -24,11 +26,20 @@ object LensHelper {
 
   val addressLens = GenLens[Person](_.address)
 
+  @Lenses
+  case class Point(x: Int, y: Int)
+  val p = Point(5, 3)
+
+  @Lenses("_")
+  case class OtherPoint(x: Int, y: Int)
+  val op = OtherPoint(5, 3)
+
 }
 
 /** == Lens ==
  *
  * A [[http://julien-truffaut.github.io/Monocle/optics/lens.html Lens]] is an optic used to zoom inside a `Product`, e.g. `case class`, `Tuple`, `HList` or even `Map`.
+ *
  * `Lenses` have two type parameters generally called `S` and `A`: `Lens[S, A]` where `S` represents the `Product` and `A` an element inside of `S`.
  *
  * Let’s take a simple case class with two fields:
@@ -81,16 +92,16 @@ object LensExercises extends FlatSpec with Matchers with Section {
   }
 
   /**
-   * We can push the idea even further, with `modifyF` we can update the target of a `Lens` in a context, cf `scalaz.Functor`:
+   * We can push the idea even further, with `modifyF` we can update the target of a `Lens` in a context, cf `cats.Functor`:
    * {{{
    *   def neighbors(n: Int): List[Int] =
    *   if(n > 0) List(n - 1, n + 1) else List(n + 1)
    *
-   *   import scalaz.std.list._ // to get Functor[List] instance
+   *   import cats.implicits._ // to get Functor[List] instance
    * }}}
    */
   def exerciseModifyF(res0: List[Address], res1: List[Address]) = {
-    import scalaz.std.list._ // to get Functor[List] instance
+    import cats.implicits._ // to get Functor[List] instance
     streetNumber.modifyF(neighbors)(address) should be(res0)
     streetNumber.modifyF(neighbors)(Address(135, "High Street")) should be(res1)
   }
@@ -100,11 +111,10 @@ object LensExercises extends FlatSpec with Matchers with Section {
    * This would work with any kind of `Functor` and is especially useful in conjunction with asynchronous APIs, where one has the task to update a deeply nested structure with the result of an asynchronous computation:
    *
    * {{{
-   *   import scalaz.std.scalaFuture._
-   *   import scala.concurrent._
-   *   import scala.concurrent.ExecutionContext.Implicits._ // to get global ExecutionContext
+   * import scala.concurrent._
+   * import scala.concurrent.ExecutionContext.Implicits._ // to get global ExecutionContext
    *
-   *   def updateNumber(n: Int): Future[Int] = Future.successful(n + 1)
+   * def updateNumber(n: Int): Future[Int] = Future.successful(n + 1)
    * }}}
    * {{{
    *   strNumber.modifyF(updateNumber)(address)
@@ -127,6 +137,42 @@ object LensExercises extends FlatSpec with Matchers with Section {
   }
 
   /**
+   * = Other Ways of Lens Composition =
+   *
+   * Is possible to compose few `Lenses` together by using `compose`:
+   */
+  def exerciseComposeMacro(res0: Person) = {
+    val compose = GenLens[Person](_.name).set("Mike") compose GenLens[Person](_.age).modify(_ + 1)
+
+    compose(john) shouldBe res0
+  }
+
+  /**
+   * Same but with the simplified macro based syntax:
+   * {{{
+   * import monocle.macros.syntax.lens._
+   *
+   * john.lens(_.name).set("Mike").lens(_.age).modify(_ + 1)
+   * }}}
+   *
+   * (All `Setter` like optics offer `set` and `modify` methods that returns an `EndoFunction` (i.e. `S => S`) which means that we can compose modification using basic function composition.)
+   *
+   * Sometimes you need an easy way to update `Product` type inside `Sum` type - for that case you can compose `Prism` with `Lens` by using `some`:
+   */
+  def exerciseLensPrismComposition(res0: Option[Int]) = {
+    import monocle.std.option.some
+    import monocle.macros.GenLens
+
+    case class B(c: Int)
+    case class A(b: Option[B])
+
+    val c = GenLens[B](_.c)
+    val b = GenLens[A](_.b)
+
+    (b composePrism some composeLens c).getOption(A(Some(B(1)))) shouldBe res0
+  }
+
+  /**
    * == Lens Generation ==
    *
    * `Lens` creation is rather boiler platy but we developed a few macros to generate them automatically. All macros are defined in a separate module (see [[http://julien-truffaut.github.io/Monocle/modules.html modules]]).
@@ -141,11 +187,36 @@ object LensExercises extends FlatSpec with Matchers with Section {
     GenLens[Person](_.address.streetName).set("Iffley Road")(john) should be(res0)
 
   /**
+   * For those who want to push `Lenses` generation even further, we created `@Lenses` macro annotation which generate `Lenses` for all fields of a case class. The generated `Lenses` are in the companion object of the case class:
+   *
+   * {{{
+   * import monocle.macros.Lenses
+   *
+   * @Lenses case class Point(x: Int, y: Int)
+   * val p = Point(5, 3)
+   * }}}
+   */
+  def exerciseLensMacroAnn(res0: Int, res1: Point) = {
+    Point.x.get(p) shouldBe res0
+    Point.y.set(0)(p) shouldBe res1
+  }
+
+  /**
+   * You can also add a prefix to `@Lenses` in order to prefix the generated `Lenses`:
+   * {{{
+   * @Lenses("_") case class OtherPoint(x: Int, y: Int)
+   * val op = OtherPoint(5, 3)
+   * }}}
+   */
+  def exerciseLensMacroAnnPrefix(res0: Int) =
+    OtherPoint._x.get(op) shouldBe res0
+
+  /**
    * == Laws ==
    *
-   * A `Lens` must satisfy all properties defined in `LensLaws` from the core module. You can check the validity of your own `Lenses` using `LensTests` from the law module.
+   * A `Lens` must satisfy all properties defined in `LensLaws` from the `core` module. You can check the validity of your own Lenses` using `LensTests` from the `law` module.
    *
-   * In particular, a Lens must respect the `getSet` law which states that if you get a value `A` from `S` and set it back in, the result is an object identical to the original one. A side effect of this law is that set must only update the `A` it points to, for example it cannot increment a counter or modify another value.
+   * In particular, a `Lens` must respect the `getSet` law which states that if you get a value `A` from `S` and `set` it back in, the result is an object identical to the original one. A side effect of this law is that `set` must only update the `A` it points to, for example it cannot increment a counter or modify another value.
    *
    * On the other hand, the `setGet` law states that if you `set` a `value`, you always `get` the same value back. This law guarantees that `set` is actually updating a value `A` inside of `S`.
    *
