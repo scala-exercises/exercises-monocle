@@ -1,17 +1,17 @@
 /*
- * scala-exercises - exercises-monocle
- * Copyright (C) 2015-2016 47 Degrees, LLC. <http://www.47deg.com>
+ *  scala-exercises - exercises-monocle
+ *  Copyright (C) 2015-2019 47 Degrees, LLC. <http://www.47deg.com>
+ *
  */
 
-package monocle
+package monoclelib
 
-import monocleex.LensExercises
-import monocleex.LensHelper.{Address, Person}
+import LensHelper.{Address, Person, Point}
 import org.scalacheck.{Arbitrary, Gen}
-import org.scalacheck.Shapeless._
+import org.scalacheck.ScalacheckShapeless._
 import org.scalaexercises.Test
 import org.scalatest.FunSuite
-import org.scalatest.prop.Checkers
+import org.scalatestplus.scalacheck.Checkers
 import shapeless.HNil
 
 class LensSpec extends FunSuite with Checkers {
@@ -69,6 +69,19 @@ class LensSpec extends FunSuite with Checkers {
     )
   }
 
+  test("exercise compose macro") {
+    check(
+      Test.testSuccess(
+        LensExercises.exerciseComposeMacro _,
+        Person("Mike", 21, LensHelper.address) :: HNil
+      )
+    )
+  }
+
+  test("exercise clens prism composition") {
+    check(Test.testSuccess(LensExercises.exerciseLensPrismComposition _, Option(1) :: HNil))
+  }
+
   test("exercise lens generation") {
     check(
       Test.testSuccess(
@@ -76,6 +89,14 @@ class LensSpec extends FunSuite with Checkers {
         Person("John", 20, Address(10, "Iffley Road")) :: HNil
       )
     )
+  }
+
+  test("exercise lens macro annotation") {
+    check(Test.testSuccess(LensExercises.exerciseLensMacroAnn _, 5 :: Point(5, 0) :: HNil))
+  }
+
+  test("exercise lens macro annotation prefix") {
+    check(Test.testSuccess(LensExercises.exerciseLensMacroAnnPrefix _, 5 :: HNil))
   }
 
   test("exercise laws") {

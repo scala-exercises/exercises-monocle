@@ -1,28 +1,28 @@
 /*
- * scala-exercises - exercises-monocle
- * Copyright (C) 2015-2016 47 Degrees, LLC. <http://www.47deg.com>
+ *  scala-exercises - exercises-monocle
+ *  Copyright (C) 2015-2019 47 Degrees, LLC. <http://www.47deg.com>
+ *
  */
 
-package monocle
+package monoclelib
 
-import org.scalatest._
 import org.scalaexercises.definitions._
+import org.scalatest._
+import monocle.Traversal
 
 object TraversalHelper {
 
   val xs = List(1, 2, 3, 4, 5)
 
-  import scalaz.std.list._ // to get the Traverse instance for List
+  import cats.implicits._ // to get all cats instances including Traverse[List]
   val eachL = Traversal.fromTraverse[List, Int]
 
   case class Point(id: String, x: Int, y: Int)
 
   val points = Traversal.apply2[Point, Int](_.x, _.y)((x, y, p) => p.copy(x = x, y = y))
 
-  import scalaz.Applicative
-  import scalaz.std.map._
-  import scalaz.syntax.traverse._
-  import scalaz.syntax.applicative._
+  import cats.Applicative
+  import _root_.alleycats.std.map._
 
   def filterKey[K, V](predicate: K => Boolean): Traversal[Map[K, V], V] =
     new Traversal[Map[K, V], V] {
@@ -30,7 +30,7 @@ object TraversalHelper {
         s.map {
           case (k, v) =>
             k -> (if (predicate(k)) f(v) else v.pure[F])
-        }.sequenceU
+        }.sequence
     }
 
   val m = Map(1 -> "one", 2 -> "two", 3 -> "three", 4 -> "Four")
@@ -39,15 +39,15 @@ object TraversalHelper {
 
 /** == Traversal ==
  *
- * A [[http://julien-truffaut.github.io/Monocle/optics/traversal.html `Traversal`]]  is the generalisation of an `Optional` to several targets. In other word, a `Traversal` allows to focus from a type `S` into `0` to n values of type `A`.
+ * A [[http://julien-truffaut.github.io/Monocle/optics/traversal.html `Traversal`]]  is the generalisation of an `Optional` to several targets. In other word, a `Traversal` allows to focus from a type `S` into 0 to n values of type `A`.
  *
- * The most common example of a `Traversal` would be to focus into all elements inside of a container (e.g. `List`, `Vector`, `Option`). To do this we will use the relation between the typeclass `scalaz.Traverse` and `Traversal`:
+ * The most common example of a `Traversal` would be to focus into all elements inside of a container (e.g. `List`, `Vector`, `Option`). To do this we will use the relation between the typeclass `cats.Traverse` and `Traversal`:
  *
  * {{{
- *   import monocle.Traversal
- *   import scalaz.std.list._   // to get the Traverse instance for List
+ * import monocle.Traversal
+ * import cats.implicits._   // to get all cats instances including Traverse[List]
  *
- *   val xs = List(1,2,3,4,5)
+ * val xs = List(1,2,3,4,5)
  * }}}
  *
  * @param name traversal
@@ -100,21 +100,19 @@ object TraversalExercises extends FlatSpec with Matchers with Section {
    *
    * For example, let’s write a `Traversal` for `Map` that will focus into all values where the key satisfies a certain predicate:
    * {{{
-   *   import monocle.Traversal
-   *   import scalaz.Applicative
-   *   import scalaz.std.map._
-   *   import scalaz.syntax.traverse._
-   *   import scalaz.syntax.applicative._
+   * import monocle.Traversal
+   * import cats.Applicative
+   * import alleycats.std.map._ // to get Traverse instance for Map (SortedMap does not require this import)
    *
-   *   def filterKey[K, V](predicate: K => Boolean): Traversal[Map[K, V], V] =
+   * def filterKey[K, V](predicate: K => Boolean): Traversal[Map[K, V], V] =
    *     new Traversal[Map[K, V], V]{
    *       def modifyF[F[_]: Applicative](f: V => F[V])(s: Map[K, V]): F[Map[K, V]] =
-   *       s.map{ case (k, v) =>
-   *       k -> (if(predicate(k)) f(v) else v.pure[F])
-   *    }.sequenceU
-   *   }
+   *         s.map{ case (k, v) =>
+   *           k -> (if(predicate(k)) f(v) else v.pure[F])
+   *         }.sequence
+   *     }
    *
-   *   val m = Map(1 -> "one", 2 -> "two", 3 -> "three", 4 -> "Four")
+   * val m = Map(1 -> "one", 2 -> "two", 3 -> "three", 4 -> "Four")
    * }}}
    */
   def exerciseModifyF(res0: Map[Int, String]) = {

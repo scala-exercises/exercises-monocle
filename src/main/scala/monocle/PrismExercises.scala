@@ -1,10 +1,12 @@
 /*
- * scala-exercises - exercises-monocle
- * Copyright (C) 2015-2016 47 Degrees, LLC. <http://www.47deg.com>
+ *  scala-exercises - exercises-monocle
+ *  Copyright (C) 2015-2019 47 Degrees, LLC. <http://www.47deg.com>
+ *
  */
 
-package monocle
+package monoclelib
 
+import monocle.Prism
 import org.scalaexercises.definitions._
 import org.scalatest._
 
@@ -176,9 +178,9 @@ object PrismExercises extends FlatSpec with Matchers with Section {
    *
    * == Prism Laws ==
    *
-   * A `Prism` must satisfy all properties defined in `PrismLaws` from the core module. You can check the validity of your own `Prisms` using `PrismTests` from the law module.
+   * A `Prism` must satisfy all properties defined in `PrismLaws` from the core module. You can check the validity of your own `Prisms` using `PrismTests` from the `law` module.
    *
-   * In particular, a `Prism` must verify that `getOption` and `reverseGet` allow a full round trip if the Prism matches i.e. if `getOption` returns a `Some`.
+   * In particular, a Prism` must verify that `getOption` and `reverseGet` allow a full round trip if the Prism matches i.e. if `getOption` returns a `Some`.
    *
    *
    */

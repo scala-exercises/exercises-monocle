@@ -1,11 +1,12 @@
 /*
- * scala-exercises - exercises-monocle
- * Copyright (C) 2015-2016 47 Degrees, LLC. <http://www.47deg.com>
+ *  scala-exercises - exercises-monocle
+ *  Copyright (C) 2015-2019 47 Degrees, LLC. <http://www.47deg.com>
+ *
  */
 
-package monocle
+package monoclelib
 
-import monocle.law.OptionalLaws
+import monocle.Optional
 import org.scalaexercises.definitions._
 import org.scalatest._
 
@@ -77,10 +78,10 @@ object OptionalExercises extends FlatSpec with Matchers with Section {
    *
    * {{{
    *   head.getOrModify(xs)
-   *     // res2: scalaz.\/[List[Int],Int] = \/-(1)
+   *     // res2: Either[List[Int],Int] = Right(1)
    *
    *   head.getOrModify(ys)
-   *     // res3: scalaz.\/[List[Int],Int] = -\/(List())
+   *     // res3: Either[List[Int],Int] = Left(List())
    * }}}
    *
    * The function `getOrModify` is mostly used for polymorphic optics. If you use monomorphic optics, use function `getOption`
