@@ -10,11 +10,11 @@ import LensHelper.{Address, Person, Point}
 import org.scalacheck.{Arbitrary, Gen}
 import org.scalacheck.ScalacheckShapeless._
 import org.scalaexercises.Test
-import org.scalatest.FunSuite
+import org.scalatest.funsuite.AnyFunSuite
 import org.scalatestplus.scalacheck.Checkers
 import shapeless.HNil
 
-class LensSpec extends FunSuite with Checkers {
+class LensSpec extends AnyFunSuite with Checkers {
 
   implicit val addressArbitrary = Arbitrary {
     for {

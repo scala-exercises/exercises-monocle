@@ -10,7 +10,8 @@ import monocle.Lens
 import monocle.macros.GenLens
 import monocle.macros.Lenses
 import org.scalaexercises.definitions._
-import org.scalatest._
+import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.matchers.should.Matchers
 
 object LensHelper {
   case class Address(streetNumber: Int, streetName: String)
@@ -65,7 +66,7 @@ object LensHelper {
  *
  * @param name lens
  */
-object LensExercises extends FlatSpec with Matchers with Section {
+object LensExercises extends AnyFlatSpec with Matchers with Section {
 
   import LensHelper._
 

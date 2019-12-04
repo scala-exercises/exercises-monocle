@@ -7,7 +7,8 @@
 package monoclelib
 
 import org.scalaexercises.definitions._
-import org.scalatest._
+import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.matchers.should.Matchers
 import monocle.Traversal
 
 object TraversalHelper {
@@ -52,7 +53,7 @@ object TraversalHelper {
  *
  * @param name traversal
  */
-object TraversalExercises extends FlatSpec with Matchers with Section {
+object TraversalExercises extends AnyFlatSpec with Matchers with Section {
 
   import TraversalHelper._
 

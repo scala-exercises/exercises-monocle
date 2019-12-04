@@ -9,11 +9,11 @@ package monoclelib
 import TraversalHelper.Point
 import org.scalacheck.ScalacheckShapeless._
 import org.scalaexercises.Test
-import org.scalatest.FunSuite
+import org.scalatest.funsuite.AnyFunSuite
 import org.scalatestplus.scalacheck.Checkers
 import shapeless.HNil
 
-class TraversalSpec extends FunSuite with Checkers {
+class TraversalSpec extends AnyFunSuite with Checkers {
 
   test("exercise traversal") {
     check(

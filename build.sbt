@@ -16,7 +16,8 @@ lazy val monocle = (project in file("."))
       %%("scalatest", V.scalatest),
       %%("scalacheck", V.scalacheck),
       "org.typelevel"              %% "alleycats-core"            % V.cats,
-      "com.github.alexarchambault" %% "scalacheck-shapeless_1.14" % V.scalacheckShapeless
+      "com.github.alexarchambault" %% "scalacheck-shapeless_1.14" % V.scalacheckShapeless,
+      "org.scalatestplus"          %% "scalatestplus-scalacheck"  % V.scalatestplusScheck
     ),
     addCompilerPlugin("org.scalamacros" %% "paradise" % "2.1.1" cross CrossVersion.full)
   )

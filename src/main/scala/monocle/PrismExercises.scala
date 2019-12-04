@@ -8,7 +8,8 @@ package monoclelib
 
 import monocle.Prism
 import org.scalaexercises.definitions._
-import org.scalatest._
+import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.matchers.should.Matchers
 
 object PrismHelper {
   sealed trait Json
@@ -66,7 +67,7 @@ object PrismHelper {
  *
  * @param name prism
  */
-object PrismExercises extends FlatSpec with Matchers with Section {
+object PrismExercises extends AnyFlatSpec with Matchers with Section {
 
   import PrismHelper._
 

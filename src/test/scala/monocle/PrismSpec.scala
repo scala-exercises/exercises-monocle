@@ -8,13 +8,13 @@ package monoclelib
 
 import PrismHelper.{JNum, JStr}
 import org.scalaexercises.Test
-import org.scalatest.FunSuite
+import org.scalatest.funsuite.AnyFunSuite
 import org.scalatestplus.scalacheck.Checkers
 
 import org.scalacheck.ScalacheckShapeless._
 import shapeless.HNil
 
-class PrismSpec extends FunSuite with Checkers {
+class PrismSpec extends AnyFunSuite with Checkers {
 
   test("exercise get option apply") {
     check(
