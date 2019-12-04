@@ -8,7 +8,8 @@ package monoclelib
 
 import monocle.Optional
 import org.scalaexercises.definitions._
-import org.scalatest._
+import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.matchers.should.Matchers
 
 object OptionalHelper {
 
@@ -55,7 +56,7 @@ object OptionalHelper {
  *
  * @param name optional
  */
-object OptionalExercises extends FlatSpec with Matchers with Section {
+object OptionalExercises extends AnyFlatSpec with Matchers with Section {
 
   import OptionalHelper._
 

@@ -8,7 +8,8 @@ package monoclelib
 
 import monocle.Iso
 import monocle.macros.GenIso
-import org.scalatest._
+import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.matchers.should.Matchers
 import org.scalaexercises.definitions._
 
 object IsoHelper {
@@ -42,7 +43,7 @@ object IsoHelper {
  *
  * @param name iso
  */
-object IsoExercises extends FlatSpec with Matchers with Section {
+object IsoExercises extends AnyFlatSpec with Matchers with Section {
 
   import IsoHelper._
 

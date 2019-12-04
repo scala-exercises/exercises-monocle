@@ -9,11 +9,11 @@ package monoclelib
 import IsoHelper.Person
 import org.scalacheck.ScalacheckShapeless._
 import org.scalaexercises.Test
-import org.scalatest.FunSuite
+import org.scalatest.funsuite.AnyFunSuite
 import org.scalatestplus.scalacheck.Checkers
 import shapeless.HNil
 
-class IsoSpec extends FunSuite with Checkers {
+class IsoSpec extends AnyFunSuite with Checkers {
 
   test("exercise person to tuple") {
     check(

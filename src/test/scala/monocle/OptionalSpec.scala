@@ -8,11 +8,11 @@ package monoclelib
 
 import org.scalacheck.ScalacheckShapeless._
 import org.scalaexercises.Test
-import org.scalatest.FunSuite
+import org.scalatest.funsuite.AnyFunSuite
 import org.scalatestplus.scalacheck.Checkers
 import shapeless.HNil
 
-class OptionalSpec extends FunSuite with Checkers {
+class OptionalSpec extends AnyFunSuite with Checkers {
 
   test("exercise non empty") {
     check(
