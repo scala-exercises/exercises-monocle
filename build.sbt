@@ -1,6 +1,6 @@
 import ProjectPlugin.autoImport._
 
-val scalaExercisesV = "0.5.0-SNAPSHOT"
+val scalaExercisesV = "0.6.0-SNAPSHOT"
 
 def dep(artifactId: String) = "org.scala-exercises" %% artifactId % scalaExercisesV
 
@@ -18,8 +18,7 @@ lazy val monocle = (project in file("."))
       "org.typelevel"              %% "alleycats-core"            % V.cats,
       "com.github.alexarchambault" %% "scalacheck-shapeless_1.14" % V.scalacheckShapeless,
       "org.scalatestplus"          %% "scalatestplus-scalacheck"  % V.scalatestplusScheck
-    ),
-    addCompilerPlugin("org.scalamacros" %% "paradise" % "2.1.1" cross CrossVersion.full)
+    )
   )
 
 // Distribution
