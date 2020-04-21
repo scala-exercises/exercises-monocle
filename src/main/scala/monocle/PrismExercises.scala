@@ -181,7 +181,7 @@ object PrismExercises extends AnyFlatSpec with Matchers with Section {
    *
    * A `Prism` must satisfy all properties defined in `PrismLaws` from the core module. You can check the validity of your own `Prisms` using `PrismTests` from the `law` module.
    *
-   * In particular, a Prism` must verify that `getOption` and `reverseGet` allow a full round trip if the Prism matches i.e. if `getOption` returns a `Some`.
+   * In particular, a `Prism` must verify that `getOption` and `reverseGet` allow a full round trip if the Prism matches i.e. if `getOption` returns a `Some`.
    *
    *
    */
