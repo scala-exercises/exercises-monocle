@@ -55,7 +55,8 @@ class LensSpec extends AnyFunSuite with Checkers {
         LensExercises.exerciseModifyF _,
         List(Address(9, "High Street"), Address(11, "High Street")) :: List(
           Address(134, "High Street"),
-          Address(136, "High Street")) :: HNil
+          Address(136, "High Street")
+        ) :: HNil
       )
     )
   }
