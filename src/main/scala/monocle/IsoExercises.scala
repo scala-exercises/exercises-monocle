@@ -1,5 +1,5 @@
 /*
- * Copyright 2017-2020 47 Degrees <https://47deg.com>
+ * Copyright 2017-2020 47 Degrees Open Source <https://www.47deg.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,7 +41,8 @@ object IsoHelper {
 
 }
 
-/** == Iso ==
+/**
+ * == Iso ==
  *
  * An [[http://julien-truffaut.github.io/Monocle/optics/iso.html `Iso`]] is an optic which converts elements of type `S` into elements of type `A` without loss.
  *
@@ -148,7 +149,6 @@ object IsoExercises extends AnyFlatSpec with Matchers with Section {
    * An `Iso` must satisfy all properties defined in `IsoLaws` from the core module. You can check the validity of your own `Iso` using `IsoTests` from the law module.
    *
    * In particular, an Iso must verify that `get` and `reverseGet` are inverse. This is done via `roundTripOneWay` and `roundTripOtherWay` laws:
-   *
    */
   def exerciseLaws(res0: Boolean, res1: Boolean) = {
     personToTuple.get(Person("Zoe", 25))

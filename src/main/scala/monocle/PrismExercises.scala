@@ -1,5 +1,5 @@
 /*
- * Copyright 2017-2020 47 Degrees <https://47deg.com>
+ * Copyright 2017-2020 47 Degrees Open Source <https://www.47deg.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,7 +40,8 @@ object PrismHelper {
   val rawJNum: Prism[Json, JNum] = GenPrism[Json, JNum]
 }
 
-/** == Prism ==
+/**
+ * == Prism ==
  *
  * A [[http://julien-truffaut.github.io/Monocle/optics/prism.html `Prism`]] is an optic used to select part of a `Sum` type (also known as `Coproduct`), e.g. `sealed trait` or `Enum`.
  *
@@ -157,7 +158,8 @@ object PrismExercises extends AnyFlatSpec with Matchers with Section {
 
   }
 
-  /**  == Prism Generation ==
+  /**
+   *  == Prism Generation ==
    *
    * Generating `Prisms` for subclasses is fairly common, so we added a macro to simplify the process. All macros are defined in a separate module (see [[http://julien-truffaut.github.io/Monocle/modules.html modules]]).
    *
@@ -192,8 +194,6 @@ object PrismExercises extends AnyFlatSpec with Matchers with Section {
    * A `Prism` must satisfy all properties defined in `PrismLaws` from the core module. You can check the validity of your own `Prisms` using `PrismTests` from the `law` module.
    *
    * In particular, a `Prism` must verify that `getOption` and `reverseGet` allow a full round trip if the Prism matches i.e. if `getOption` returns a `Some`.
-   *
-   *
    */
   def exerciseLaws(res0: Boolean, res1: Boolean) = {
     val jStr = Prism.partial[Json, String] { case JStr(v) => v }(JStr)

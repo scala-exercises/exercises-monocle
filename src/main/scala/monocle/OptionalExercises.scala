@@ -1,5 +1,5 @@
 /*
- * Copyright 2017-2020 47 Degrees <https://47deg.com>
+ * Copyright 2017-2020 47 Degrees Open Source <https://www.47deg.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,7 +38,8 @@ object OptionalHelper {
 
 }
 
-/** == Optional ==
+/**
+ * == Optional ==
  *
  * An [[http://julien-truffaut.github.io/Monocle/optics/optional.html `Optional`]]  is an Optic used to zoom inside a `Product`, e.g. `case class`, `Tuple`, `HList` or even Map. Unlike the `Lens`, the element that the `Optional` focuses on may not exist.
  *

@@ -1,5 +1,5 @@
 /*
- * Copyright 2017-2020 47 Degrees <https://47deg.com>
+ * Copyright 2017-2020 47 Degrees Open Source <https://www.47deg.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,7 +48,8 @@ object TraversalHelper {
 
 }
 
-/** == Traversal ==
+/**
+ * == Traversal ==
  *
  * A [[http://julien-truffaut.github.io/Monocle/optics/traversal.html `Traversal`]]  is the generalisation of an `Optional` to several targets. In other word, a `Traversal` allows to focus from a type `S` into 0 to n values of type `A`.
  *
@@ -135,14 +136,14 @@ object TraversalExercises extends AnyFlatSpec with Matchers with Section {
 
   }
 
-  /** == Law ==
+  /**
+   * == Law ==
    *
    * A `Traversal` must satisfy all properties defined in `TraversalLaws` from the `core` module. You can check the validity of your own `Traversal` using `TraversalTests` from the `law` module.
    *
    * In particular, a `Traversal` must respect the `modifyGetAll` law which checks that you can modify all elements targeted by a `Traversal`
    *
    * Another important `law` is `composeModify` also known as fusion law:
-   *
    */
   def exerciseLaws(res0: Boolean, res1: Boolean) = {
 
