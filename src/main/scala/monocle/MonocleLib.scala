@@ -18,7 +18,8 @@ package monoclelib
 
 import org.scalaexercises.definitions._
 
-/** Monocle is an optics library for Scala (and Scala.js) strongly inspired by Haskell Lens.
+/**
+ * Monocle is an optics library for Scala (and Scala.js) strongly inspired by Haskell Lens.
  *
  * @param name monocle
  */
