@@ -25,7 +25,7 @@ lazy val exercises = (project in file("."))
       "com.github.julien-truffaut" %% "monocle-core"              % "2.0.5",
       "com.github.julien-truffaut" %% "monocle-macro"             % "2.0.5",
       "com.chuusai"                %% "shapeless"                 % "2.3.3",
-      "org.scalatest"              %% "scalatest"                 % "3.1.2",
+      "org.scalatest"              %% "scalatest"                 % "3.2.0",
       "org.scalacheck"             %% "scalacheck"                % "1.14.3",
       "org.scalatestplus"          %% "scalacheck-1-14"           % "3.1.2.0",
       "com.github.alexarchambault" %% "scalacheck-shapeless_1.14" % "1.2.5"
