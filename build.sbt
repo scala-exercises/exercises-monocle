@@ -18,8 +18,8 @@ lazy val exercises = (project in file("."))
   .settings(name := "exercises-monocle")
   .settings(
     libraryDependencies ++= Seq(
-      "org.scala-exercises"        %% "exercise-compiler"         % "0.6.1",
-      "org.scala-exercises"        %% "definitions"               % "0.6.1",
+      "org.scala-exercises"        %% "exercise-compiler"         % "0.6.3",
+      "org.scala-exercises"        %% "definitions"               % "0.6.3",
       "org.typelevel"              %% "alleycats-core"            % "2.1.1",
       "org.typelevel"              %% "cats-core"                 % "2.1.1",
       "com.github.julien-truffaut" %% "monocle-core"              % "2.0.5",
