@@ -1,5 +1,29 @@
 # Changelog
 
+## [v0.6.4](https://github.com/scala-exercises/exercises-monocle/tree/v0.6.4) (2020-06-30)
+
+[Full Changelog](https://github.com/scala-exercises/exercises-monocle/compare/v0.6.3...v0.6.4)
+
+## [v0.6.3](https://github.com/scala-exercises/exercises-monocle/tree/v0.6.3) (2020-06-29)
+
+[Full Changelog](https://github.com/scala-exercises/exercises-monocle/compare/v0.6.2...v0.6.3)
+
+📈 **Dependency updates**
+
+- Update sbt to 1.3.13 [\#42](https://github.com/scala-exercises/exercises-monocle/pull/42) ([scala-steward](https://github.com/scala-steward))
+- Update sbt-mdoc to 2.2.3 [\#41](https://github.com/scala-exercises/exercises-monocle/pull/41) ([scala-steward](https://github.com/scala-steward))
+- Update scalacheck-1-14 to 3.2.0.0 [\#40](https://github.com/scala-exercises/exercises-monocle/pull/40) ([scala-steward](https://github.com/scala-steward))
+- Update scalatest to 3.2.0 [\#39](https://github.com/scala-exercises/exercises-monocle/pull/39) ([scala-steward](https://github.com/scala-steward))
+- Update scalafmt-core to 2.6.1 [\#38](https://github.com/scala-exercises/exercises-monocle/pull/38) ([scala-steward](https://github.com/scala-steward))
+- Update sbt-mdoc to 2.2.2 [\#37](https://github.com/scala-exercises/exercises-monocle/pull/37) ([scala-steward](https://github.com/scala-steward))
+- Update sbt to 1.3.11 [\#35](https://github.com/scala-exercises/exercises-monocle/pull/35) ([scala-steward](https://github.com/scala-steward))
+- Update scalatest to 3.1.2 [\#34](https://github.com/scala-exercises/exercises-monocle/pull/34) ([scala-steward](https://github.com/scala-steward))
+
+**Merged pull requests:**
+
+- Update definitions, exercise-compiler, ... to 0.6.3 [\#43](https://github.com/scala-exercises/exercises-monocle/pull/43) ([scala-steward](https://github.com/scala-steward))
+- Prepare repository for next  release and SBT build improvements [\#36](https://github.com/scala-exercises/exercises-monocle/pull/36) ([juanpedromoreno](https://github.com/juanpedromoreno))
+
 ## [v0.6.2](https://github.com/scala-exercises/exercises-monocle/tree/v0.6.2) (2020-04-27)
 
 [Full Changelog](https://github.com/scala-exercises/exercises-monocle/compare/v0.6.1...v0.6.2)
