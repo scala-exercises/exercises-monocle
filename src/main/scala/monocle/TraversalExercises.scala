@@ -38,9 +38,8 @@ object TraversalHelper {
   def filterKey[K, V](predicate: K => Boolean): Traversal[Map[K, V], V] =
     new Traversal[Map[K, V], V] {
       def modifyF[F[_]: Applicative](f: V => F[V])(s: Map[K, V]): F[Map[K, V]] =
-        s.map {
-          case (k, v) =>
-            k -> (if (predicate(k)) f(v) else v.pure[F])
+        s.map { case (k, v) =>
+          k -> (if (predicate(k)) f(v) else v.pure[F])
         }.sequence
     }
 

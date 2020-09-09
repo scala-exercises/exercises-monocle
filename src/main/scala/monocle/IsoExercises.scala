@@ -25,8 +25,8 @@ import org.scalaexercises.definitions._
 object IsoHelper {
   case class Person(name: String, age: Int)
 
-  val personToTuple = Iso[Person, (String, Int)](p => (p.name, p.age)) {
-    case (name, age) => Person(name, age)
+  val personToTuple = Iso[Person, (String, Int)](p => (p.name, p.age)) { case (name, age) =>
+    Person(name, age)
   }
 
   def listToVector[A] = Iso[List[A], Vector[A]](_.toVector)(_.toList)
