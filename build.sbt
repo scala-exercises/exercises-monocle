@@ -29,7 +29,7 @@ lazy val exercises = (project in file("."))
       "com.github.alexarchambault" %% "scalacheck-shapeless_1.14" % "1.2.5"
     ),
     scalacOptions += "-Ymacro-annotations",
-    addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.11.3" cross CrossVersion.full)
+    addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.12.0" cross CrossVersion.full)
   )
   .enablePlugins(ExerciseCompilerPlugin)
 
