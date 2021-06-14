@@ -50,7 +50,7 @@ object LensHelper {
 /**
  * == Lens ==
  *
- * A [[http://julien-truffaut.github.io/Monocle/optics/lens.html Lens]] is an optic used to zoom inside a `Product`, e.g. `case class`, `Tuple`, `HList` or even `Map`.
+ * A [[http://julien-truffaut.github.io/Monocle/optics/lens.html Lens]] is an optic used to zoom inside a `case class`, e.g. `Product`, `Tuple`, `HList` or even `Map`.
  *
  * `Lenses` have two type parameters generally called `S` and `A`: `Lens[S, A]` where `S` represents the `Product` and `A` an element inside of `S`.
  *
