@@ -21,7 +21,8 @@ import org.scalaexercises.definitions._
 /**
  * Monocle is an optics library for Scala (and Scala.js) strongly inspired by Haskell Lens.
  *
- * @param name monocle
+ * @param name
+ *   monocle
  */
 object MonocleLib extends Library {
   override def owner = "scala-exercises"

@@ -48,11 +48,15 @@ object TraversalHelper {
 }
 
 /**
- * == Traversal ==
+ * ==Traversal==
  *
- * A [[http://julien-truffaut.github.io/Monocle/optics/traversal.html `Traversal`]]  is the generalisation of an `Optional` to several targets. In other word, a `Traversal` allows to focus from a type `S` into 0 to n values of type `A`.
+ * A [[http://julien-truffaut.github.io/Monocle/optics/traversal.html `Traversal`]] is the
+ * generalisation of an `Optional` to several targets. In other word, a `Traversal` allows to focus
+ * from a type `S` into 0 to n values of type `A`.
  *
- * The most common example of a `Traversal` would be to focus into all elements inside of a container (e.g. `List`, `Vector`, `Option`). To do this we will use the relation between the typeclass `cats.Traverse` and `Traversal`:
+ * The most common example of a `Traversal` would be to focus into all elements inside of a
+ * container (e.g. `List`, `Vector`, `Option`). To do this we will use the relation between the
+ * typeclass `cats.Traverse` and `Traversal`:
  *
  * {{{
  * import monocle.Traversal
@@ -61,7 +65,8 @@ object TraversalHelper {
  * val xs = List(1,2,3,4,5)
  * }}}
  *
- * @param name traversal
+ * @param name
+ *   traversal
  */
 object TraversalExercises extends AnyFlatSpec with Matchers with Section {
 
@@ -81,7 +86,8 @@ object TraversalExercises extends AnyFlatSpec with Matchers with Section {
   }
 
   /**
-   * A `Traversal` is also a `Fold`, so we have access to a few interesting methods to query our data:
+   * A `Traversal` is also a `Fold`, so we have access to a few interesting methods to query our
+   * data:
    */
   def exerciseFold(res0: List[Int], res1: Option[Int], res2: Option[Int], res3: Boolean) = {
 
@@ -95,7 +101,8 @@ object TraversalExercises extends AnyFlatSpec with Matchers with Section {
   }
 
   /**
-   * Traversal also offers smart constructors to build a `Traversal` for a fixed number of target (currently 2 to 6 targets):
+   * Traversal also offers smart constructors to build a `Traversal` for a fixed number of target
+   * (currently 2 to 6 targets):
    *
    * {{{
    *   case class Point(id: String, x: Int, y: Int)
@@ -107,9 +114,12 @@ object TraversalExercises extends AnyFlatSpec with Matchers with Section {
     points.set(5)(Point("bottom-left", 0, 0)) should be(res0)
 
   /**
-   * Finally, if you want to build something more custom you will have to implement a `Traversal` manually. A `Traversal` is defined by a single method `modifyF` which corresponds to the Van Laarhoven representation.
+   * Finally, if you want to build something more custom you will have to implement a `Traversal`
+   * manually. A `Traversal` is defined by a single method `modifyF` which corresponds to the Van
+   * Laarhoven representation.
    *
-   * For example, let’s write a `Traversal` for `Map` that will focus into all values where the key satisfies a certain predicate:
+   * For example, let’s write a `Traversal` for `Map` that will focus into all values where the key
+   * satisfies a certain predicate:
    * {{{
    * import monocle.Traversal
    * import cats.Applicative
@@ -136,11 +146,14 @@ object TraversalExercises extends AnyFlatSpec with Matchers with Section {
   }
 
   /**
-   * == Law ==
+   * ==Law==
    *
-   * A `Traversal` must satisfy all properties defined in `TraversalLaws` from the `core` module. You can check the validity of your own `Traversal` using `TraversalTests` from the `law` module.
+   * A `Traversal` must satisfy all properties defined in `TraversalLaws` from the `core` module.
+   * You can check the validity of your own `Traversal` using `TraversalTests` from the `law`
+   * module.
    *
-   * In particular, a `Traversal` must respect the `modifyGetAll` law which checks that you can modify all elements targeted by a `Traversal`
+   * In particular, a `Traversal` must respect the `modifyGetAll` law which checks that you can
+   * modify all elements targeted by a `Traversal`
    *
    * Another important `law` is `composeModify` also known as fusion law:
    */
