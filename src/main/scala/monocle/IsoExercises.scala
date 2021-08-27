@@ -42,9 +42,10 @@ object IsoHelper {
 }
 
 /**
- * == Iso ==
+ * ==Iso==
  *
- * An [[http://julien-truffaut.github.io/Monocle/optics/iso.html `Iso`]] is an optic which converts elements of type `S` into elements of type `A` without loss.
+ * An [[http://julien-truffaut.github.io/Monocle/optics/iso.html `Iso`]] is an optic which converts
+ * elements of type `S` into elements of type `A` without loss.
  *
  * Consider a case class `Person` with two fields:
  *
@@ -52,17 +53,20 @@ object IsoHelper {
  *   case class Person(name: String, age: Int)
  * }}}
  *
- * @param name iso
+ * @param name
+ *   iso
  */
 object IsoExercises extends AnyFlatSpec with Matchers with Section {
 
   import IsoHelper._
 
   /**
-   * `Person` is equivalent to a tuple `(String, Int)` and a tuple `(String, Int)` is equivalent to `Person`. So we can create an `Iso` between `Person` and `(String, Int)` using two total functions:
+   * `Person` is equivalent to a tuple `(String, Int)` and a tuple `(String, Int)` is equivalent to
+   * `Person`. So we can create an `Iso` between `Person` and `(String, Int)` using two total
+   * functions:
    *
-   *  - `get: Person => (String, Int)`
-   *  - `reverseGet (aka apply): (String, Int) => Person`
+   *   - `get: Person => (String, Int)`
+   *   - `reverseGet (aka apply): (String, Int) => Person`
    *
    * {{{
    *   import monocle.Iso
@@ -82,7 +86,9 @@ object IsoExercises extends AnyFlatSpec with Matchers with Section {
     personToTuple(("Zoe", 25)) should be(res0)
 
   /**
-   * Another common use of `Iso` is between collection. `List` and `Vector` represent the same concept, they are both an ordered sequence of elements but they have different performance characteristics. Therefore, we can define an `Iso` between a `List[A]` and a `Vector[A]`:
+   * Another common use of `Iso` is between collection. `List` and `Vector` represent the same
+   * concept, they are both an ordered sequence of elements but they have different performance
+   * characteristics. Therefore, we can define an `Iso` between a `List[A]` and a `Vector[A]`:
    * {{{
    *   def listToVector[A] = Iso[List[A], Vector[A]](_.toVector)(_.toList)
    * }}}
@@ -101,7 +107,9 @@ object IsoExercises extends AnyFlatSpec with Matchers with Section {
     vectorToList.get(Vector(1, 2, 3)) should be(res0)
 
   /**
-   * `Iso` are also convenient to lift methods from one type to another, for example a `String` can be seen as a `List[Char]` so we should be able to transform all functions `List[Char] => List[Char]` into `String => String`:
+   * `Iso` are also convenient to lift methods from one type to another, for example a `String` can
+   * be seen as a `List[Char]` so we should be able to transform all functions `List[Char] =>
+   * List[Char]` into `String => String`:
    * {{{
    *   val stringToList = Iso[String, List[Char]](_.toList)(_.mkString(""))
    * }}}
@@ -110,9 +118,10 @@ object IsoExercises extends AnyFlatSpec with Matchers with Section {
     stringToList.modify(_.tail)("Hello") should be(res0)
 
   /**
-   * = Iso Generation =
+   * =Iso Generation=
    *
-   * We defined several macros to simplify the generation of `Iso` between a case class and its `Tuple` equivalent. All macros are defined in a separate module (see modules).
+   * We defined several macros to simplify the generation of `Iso` between a case class and its
+   * `Tuple` equivalent. All macros are defined in a separate module (see modules).
    * {{{
    *     case class MyString(s: String)
    *     case class Foo()
@@ -121,7 +130,8 @@ object IsoExercises extends AnyFlatSpec with Matchers with Section {
    *     import monocle.macros.GenIso
    * }}}
    *
-   * First of all, `GenIso.apply` generates an `Iso` for `newtype` i.e. case class with a single type parameter:
+   * First of all, `GenIso.apply` generates an `Iso` for `newtype` i.e. case class with a single
+   * type parameter:
    */
   def exerciseGenIsoApply(res0: String) =
     GenIso[MyString, String].get(MyString("Hello")) should be(res0)
@@ -136,7 +146,8 @@ object IsoExercises extends AnyFlatSpec with Matchers with Section {
    * // res9: monocle.Iso[Bar.type,Unit] = monocle.PIso$$anon$10@5520ac34
    * }}}
    *
-   * Finally, `GenIso.fields` is a whitebox macro which generalise `GenIso.apply` to all case classes:
+   * Finally, `GenIso.fields` is a whitebox macro which generalise `GenIso.apply` to all case
+   * classes:
    */
   def exerciseGenIsoFields(res0: (String, Int)) =
     GenIso.fields[Person].get(Person("John", 42)) should be(res0)
@@ -144,11 +155,13 @@ object IsoExercises extends AnyFlatSpec with Matchers with Section {
   /**
    * Be aware that whitebox macros are not supported by all IDEs.
    *
-   * == Laws ==
+   * ==Laws==
    *
-   * An `Iso` must satisfy all properties defined in `IsoLaws` from the core module. You can check the validity of your own `Iso` using `IsoTests` from the law module.
+   * An `Iso` must satisfy all properties defined in `IsoLaws` from the core module. You can check
+   * the validity of your own `Iso` using `IsoTests` from the law module.
    *
-   * In particular, an Iso must verify that `get` and `reverseGet` are inverse. This is done via `roundTripOneWay` and `roundTripOtherWay` laws:
+   * In particular, an Iso must verify that `get` and `reverseGet` are inverse. This is done via
+   * `roundTripOneWay` and `roundTripOtherWay` laws:
    */
   def exerciseLaws(res0: Boolean, res1: Boolean) = {
     personToTuple.get(Person("Zoe", 25))

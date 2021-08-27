@@ -41,11 +41,13 @@ object PrismHelper {
 }
 
 /**
- * == Prism ==
+ * ==Prism==
  *
- * A [[http://julien-truffaut.github.io/Monocle/optics/prism.html `Prism`]] is an optic used to select part of a `Sum` type (also known as `Coproduct`), e.g. `sealed trait` or `Enum`.
+ * A [[http://julien-truffaut.github.io/Monocle/optics/prism.html `Prism`]] is an optic used to
+ * select part of a `Sum` type (also known as `Coproduct`), e.g. `sealed trait` or `Enum`.
  *
- * `Prisms` have two type parameters generally called `S` and `A`: `Prism[S, A]` where `S` represents the `Sum` and `A` a part of the Sum.
+ * `Prisms` have two type parameters generally called `S` and `A`: `Prism[S, A]` where `S`
+ * represents the `Sum` and `A` a part of the Sum.
  *
  * Let’s take a simplified `Json` encoding:
  *
@@ -57,9 +59,10 @@ object PrismHelper {
  *   case class JObj(v: Map[String, Json]) extends Json
  * }}}
  *
- * We can define a `Prism` which only selects `Json` elements built with a `JStr` constructor by supplying a pair of functions:
- * - `getOption: Json => Option[String]`
- * - `reverseGet (aka apply): String => Json`
+ * We can define a `Prism` which only selects `Json` elements built with a `JStr` constructor by
+ * supplying a pair of functions:
+ *   - `getOption: Json => Option[String]`
+ *   - `reverseGet (aka apply): String => Json`
  *
  * {{{
  *   import monocle.Prism
@@ -70,20 +73,23 @@ object PrismHelper {
  *   }(JStr)
  * }}}
  *
- * It is common to create a `Prism` by pattern matching on constructor, so we also added `partial` which takes a `PartialFunction`:
+ * It is common to create a `Prism` by pattern matching on constructor, so we also added `partial`
+ * which takes a `PartialFunction`:
  *
  * {{{
  *   val jStr = Prism.partial[Json, String]{case JStr(v) => v}(JStr)
  * }}}
  *
- * @param name prism
+ * @param name
+ *   prism
  */
 object PrismExercises extends AnyFlatSpec with Matchers with Section {
 
   import PrismHelper._
 
   /**
-   * We can use the supplied `getOption` and `apply` methods as constructor and pattern matcher for `JStr`:
+   * We can use the supplied `getOption` and `apply` methods as constructor and pattern matcher for
+   * `JStr`:
    */
   def exerciseGetOptionAndApply(res0: JStr, res1: Option[String], res2: Option[String]) = {
 
@@ -125,7 +131,8 @@ object PrismExercises extends AnyFlatSpec with Matchers with Section {
   }
 
   /**
-   * If we care about the success or failure of the update, we can use `setOption` or `modifyOption`:
+   * If we care about the success or failure of the update, we can use `setOption` or
+   * `modifyOption`:
    */
   def exerciseModifyOption(res0: Option[JStr], res1: Option[JNum]) = {
 
@@ -159,9 +166,11 @@ object PrismExercises extends AnyFlatSpec with Matchers with Section {
   }
 
   /**
-   *  == Prism Generation ==
+   * ==Prism Generation==
    *
-   * Generating `Prisms` for subclasses is fairly common, so we added a macro to simplify the process. All macros are defined in a separate module (see [[http://julien-truffaut.github.io/Monocle/modules.html modules]]).
+   * Generating `Prisms` for subclasses is fairly common, so we added a macro to simplify the
+   * process. All macros are defined in a separate module (see
+   * [[http://julien-truffaut.github.io/Monocle/modules.html modules]]).
    *
    * {{{
    *   import monocle.macros.GenPrism
@@ -178,7 +187,9 @@ object PrismExercises extends AnyFlatSpec with Matchers with Section {
   }
 
   /**
-   * If you want to get a `Prism[Json, Double]` instead of a `Prism[Json, JNum]`, you can compose `GenPrism` with `GenIso` (see `Iso` [[http://julien-truffaut.github.io/Monocle/optics/iso.html documentation]]):
+   * If you want to get a `Prism[Json, Double]` instead of a `Prism[Json, JNum]`, you can compose
+   * `GenPrism` with `GenIso` (see `Iso`
+   * [[http://julien-truffaut.github.io/Monocle/optics/iso.html documentation]]):
    *
    * {{{
    *   import monocle.macros.GenIso
@@ -187,13 +198,16 @@ object PrismExercises extends AnyFlatSpec with Matchers with Section {
    *   val jNull: Prism[Json, Unit] = GenPrism[Json, JNull.type] composeIso GenIso.unit[JNull.type]
    * }}}
    *
-   * A [[https://github.com/julien-truffaut/Monocle/issues/363 ticket]] currently exists to add a macro to merge these two steps together.
+   * A [[https://github.com/julien-truffaut/Monocle/issues/363 ticket]] currently exists to add a
+   * macro to merge these two steps together.
    *
-   * == Prism Laws ==
+   * ==Prism Laws==
    *
-   * A `Prism` must satisfy all properties defined in `PrismLaws` from the core module. You can check the validity of your own `Prisms` using `PrismTests` from the `law` module.
+   * A `Prism` must satisfy all properties defined in `PrismLaws` from the core module. You can
+   * check the validity of your own `Prisms` using `PrismTests` from the `law` module.
    *
-   * In particular, a `Prism` must verify that `getOption` and `reverseGet` allow a full round trip if the Prism matches i.e. if `getOption` returns a `Some`.
+   * In particular, a `Prism` must verify that `getOption` and `reverseGet` allow a full round trip
+   * if the Prism matches i.e. if `getOption` returns a `Some`.
    */
   def exerciseLaws(res0: Boolean, res1: Boolean) = {
     val jStr = Prism.partial[Json, String] { case JStr(v) => v }(JStr)

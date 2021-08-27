@@ -48,34 +48,39 @@ object LensHelper {
 }
 
 /**
- * == Lens ==
+ * ==Lens==
  *
- * A [[http://julien-truffaut.github.io/Monocle/optics/lens.html Lens]] is an optic used to zoom inside a product type, e.g. `case class`, `Tuple`, `HList` or even `Map`.
+ * A [[http://julien-truffaut.github.io/Monocle/optics/lens.html Lens]] is an optic used to zoom
+ * inside a product type, e.g. `case class`, `Tuple`, `HList` or even `Map`.
  *
- * `Lenses` have two type parameters generally called `S` and `A`: `Lens[S, A]` where `S` represents the `Product` and `A` an element inside of `S`.
+ * `Lenses` have two type parameters generally called `S` and `A`: `Lens[S, A]` where `S` represents
+ * the `Product` and `A` an element inside of `S`.
  *
  * Let’s take a simple case class with two fields:
  * {{{
  *   case class Address(strNumber: Int, streetName: String)
  * }}}
  *
- * We can create a `Lens[Address, Int]` which zooms from an `Address` to its field `strNumber` by supplying a pair of functions:
+ * We can create a `Lens[Address, Int]` which zooms from an `Address` to its field `strNumber` by
+ * supplying a pair of functions:
  *
- *  - `get: Address => Int`
- *  - `set: Int => Address => Address`
+ *   - `get: Address => Int`
+ *   - `set: Int => Address => Address`
  *
  * {{{
  *   import monocle.Lens
  *   val strNumber = Lens[Address, Int](_.strNumber)(n => a => a.copy(strNumber = n))
  * }}}
  *
- * This case is really straightforward so we automated the generation of `Lenses` from case classes using a macro:
+ * This case is really straightforward so we automated the generation of `Lenses` from case classes
+ * using a macro:
  * {{{
  *   import monocle.macros.GenLens
  *   val strNumber = GenLens[Address](_.strNumber)
  * }}}
  *
- * @param name lens
+ * @param name
+ *   lens
  */
 object LensExercises extends AnyFlatSpec with Matchers with Section {
 
@@ -94,7 +99,8 @@ object LensExercises extends AnyFlatSpec with Matchers with Section {
   }
 
   /**
-   * We can also `modify` the target of `Lens` with a function, this is equivalent to call `get` and then `set`:
+   * We can also `modify` the target of `Lens` with a function, this is equivalent to call `get` and
+   * then `set`:
    */
   def exerciseModify(res0: Address, res1: Int, res2: Address) = {
     streetNumber.modify(_ + 1)(address) should be(res0)
@@ -104,7 +110,8 @@ object LensExercises extends AnyFlatSpec with Matchers with Section {
   }
 
   /**
-   * We can push the idea even further, with `modifyF` we can update the target of a `Lens` in a context, cf `cats.Functor`:
+   * We can push the idea even further, with `modifyF` we can update the target of a `Lens` in a
+   * context, cf `cats.Functor`:
    * {{{
    *   def neighbors(n: Int): List[Int] =
    *   if(n > 0) List(n - 1, n + 1) else List(n + 1)
@@ -120,7 +127,9 @@ object LensExercises extends AnyFlatSpec with Matchers with Section {
 
   // TODO find a way to work with Future
   /**
-   * This would work with any kind of `Functor` and is especially useful in conjunction with asynchronous APIs, where one has the task to update a deeply nested structure with the result of an asynchronous computation:
+   * This would work with any kind of `Functor` and is especially useful in conjunction with
+   * asynchronous APIs, where one has the task to update a deeply nested structure with the result
+   * of an asynchronous computation:
    *
    * {{{
    * import scala.concurrent._
@@ -149,7 +158,7 @@ object LensExercises extends AnyFlatSpec with Matchers with Section {
   }
 
   /**
-   * = Other Ways of Lens Composition =
+   * =Other Ways of Lens Composition=
    *
    * Is possible to compose few `Lenses` together by using `compose`:
    */
@@ -167,9 +176,11 @@ object LensExercises extends AnyFlatSpec with Matchers with Section {
    * john.lens(_.name).set("Mike").lens(_.age).modify(_ + 1)
    * }}}
    *
-   * (All `Setter` like optics offer `set` and `modify` methods that returns an `EndoFunction` (i.e. `S => S`) which means that we can compose modification using basic function composition.)
+   * (All `Setter` like optics offer `set` and `modify` methods that returns an `EndoFunction` (i.e.
+   * `S => S`) which means that we can compose modification using basic function composition.)
    *
-   * Sometimes you need an easy way to update `Product` type inside `Sum` type - for that case you can compose `Prism` with `Lens` by using `some`:
+   * Sometimes you need an easy way to update `Product` type inside `Sum` type - for that case you
+   * can compose `Prism` with `Lens` by using `some`:
    */
   def exerciseLensPrismComposition(res0: Option[Int]) = {
     import monocle.std.option.some
@@ -185,9 +196,11 @@ object LensExercises extends AnyFlatSpec with Matchers with Section {
   }
 
   /**
-   * == Lens Generation ==
+   * ==Lens Generation==
    *
-   * `Lens` creation is rather boiler platy but we developed a few macros to generate them automatically. All macros are defined in a separate module (see [[http://julien-truffaut.github.io/Monocle/modules.html modules]]).
+   * `Lens` creation is rather boiler platy but we developed a few macros to generate them
+   * automatically. All macros are defined in a separate module (see
+   * [[http://julien-truffaut.github.io/Monocle/modules.html modules]]).
    * {{{
    *   import monocle.macros.GenLens
    *   val age = GenLens[Person](_.age)
@@ -199,7 +212,9 @@ object LensExercises extends AnyFlatSpec with Matchers with Section {
     GenLens[Person](_.address.streetName).set("Iffley Road")(john) should be(res0)
 
   /**
-   * For those who want to push `Lenses` generation even further, we created `@Lenses` macro annotation which generate `Lenses` for all fields of a case class. The generated `Lenses` are in the companion object of the case class:
+   * For those who want to push `Lenses` generation even further, we created `@Lenses` macro
+   * annotation which generate `Lenses` for all fields of a case class. The generated `Lenses` are
+   * in the companion object of the case class:
    *
    * {{{
    * import monocle.macros.Lenses
@@ -224,13 +239,18 @@ object LensExercises extends AnyFlatSpec with Matchers with Section {
     OtherPoint._x.get(op) shouldBe res0
 
   /**
-   * == Laws ==
+   * ==Laws==
    *
-   * A `Lens` must satisfy all properties defined in `LensLaws` from the `core` module. You can check the validity of your own Lenses` using `LensTests` from the `law` module.
+   * A `Lens` must satisfy all properties defined in `LensLaws` from the `core` module. You can
+   * check the validity of your own Lenses` using `LensTests` from the `law` module.
    *
-   * In particular, a `Lens` must respect the `getSet` law which states that if you get a value `A` from `S` and `set` it back in, the result is an object identical to the original one. A side effect of this law is that `set` must only update the `A` it points to, for example it cannot increment a counter or modify another value.
+   * In particular, a `Lens` must respect the `getSet` law which states that if you get a value `A`
+   * from `S` and `set` it back in, the result is an object identical to the original one. A side
+   * effect of this law is that `set` must only update the `A` it points to, for example it cannot
+   * increment a counter or modify another value.
    *
-   * On the other hand, the `setGet` law states that if you `set` a `value`, you always `get` the same value back. This law guarantees that `set` is actually updating a value `A` inside of `S`.
+   * On the other hand, the `setGet` law states that if you `set` a `value`, you always `get` the
+   * same value back. This law guarantees that `set` is actually updating a value `A` inside of `S`.
    */
   def exerciseLaws(res0: Boolean, res1: Boolean) = {
     val streetNumber = Lens[Address, Int](_.streetNumber)(n => a => a.copy(streetNumber = n))

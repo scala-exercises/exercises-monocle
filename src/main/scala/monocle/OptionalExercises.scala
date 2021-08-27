@@ -39,18 +39,22 @@ object OptionalHelper {
 }
 
 /**
- * == Optional ==
+ * ==Optional==
  *
- * An [[http://julien-truffaut.github.io/Monocle/optics/optional.html `Optional`]]  is an Optic used to zoom inside a `Product`, e.g. `case class`, `Tuple`, `HList` or even Map. Unlike the `Lens`, the element that the `Optional` focuses on may not exist.
+ * An [[http://julien-truffaut.github.io/Monocle/optics/optional.html `Optional`]] is an Optic used
+ * to zoom inside a `Product`, e.g. `case class`, `Tuple`, `HList` or even Map. Unlike the `Lens`,
+ * the element that the `Optional` focuses on may not exist.
  *
- * `Optionals` have two type parameters generally called `S` and `A`: `Optional[S, A]` where `S` represents the `Product` and `A` an optional element inside of `S`.
+ * `Optionals` have two type parameters generally called `S` and `A`: `Optional[S, A]` where `S`
+ * represents the `Product` and `A` an optional element inside of `S`.
  *
  * Let’s take a simple list with integers.
  *
- * We can create an `Optional[List[Int], Int]` which zooms from a `List[Int]` to its potential head by supplying a pair of functions:
+ * We can create an `Optional[List[Int], Int]` which zooms from a `List[Int]` to its potential head
+ * by supplying a pair of functions:
  *
- *  -  `getOption: List[Int] => Option[Int]`
- *  -  `set: Int => List[Int] => List[Int]`
+ *   - `getOption: List[Int] => Option[Int]`
+ *   - `set: Int => List[Int] => List[Int]`
  *
  * {{{
  *   import monocle.Optional
@@ -62,10 +66,11 @@ object OptionalHelper {
  *     case Nil => Nil
  *     case x :: xs => a :: xs
  *     }
- *  }
+ *   }
  * }}}
  *
- * @param name optional
+ * @param name
+ *   optional
  */
 object OptionalExercises extends AnyFlatSpec with Matchers with Section {
 
@@ -86,7 +91,8 @@ object OptionalExercises extends AnyFlatSpec with Matchers with Section {
   }
 
   /**
-   * We can use the supplied `getOrModify` function to retrieve the target if it matches, or the original value:
+   * We can use the supplied `getOrModify` function to retrieve the target if it matches, or the
+   * original value:
    *
    * {{{
    *   head.getOrModify(xs)
@@ -96,7 +102,8 @@ object OptionalExercises extends AnyFlatSpec with Matchers with Section {
    *     // res3: Either[List[Int],Int] = Left(List())
    * }}}
    *
-   * The function `getOrModify` is mostly used for polymorphic optics. If you use monomorphic optics, use function `getOption`
+   * The function `getOrModify` is mostly used for polymorphic optics. If you use monomorphic
+   * optics, use function `getOption`
    *
    * We can use the supplied `getOption` and set functions:
    */
@@ -127,11 +134,13 @@ object OptionalExercises extends AnyFlatSpec with Matchers with Section {
   }
 
   /**
-   * == Laws ==
+   * ==Laws==
    *
-   * An `Optional` must satisfy all properties defined in `OptionalLaws` in core module. You can check the validity of your own `Optional` using `OptionalTests` in law module.
+   * An `Optional` must satisfy all properties defined in `OptionalLaws` in core module. You can
+   * check the validity of your own `Optional` using `OptionalTests` in law module.
    *
-   * `getOptionSet` states that if you `getOrModify` a value `A` from `S` and then `set` it back in, the result is an object identical to the original one.
+   * `getOptionSet` states that if you `getOrModify` a value `A` from `S` and then `set` it back in,
+   * the result is an object identical to the original one.
    *
    * `setGetOption` states that if you `set` a value, you always `getOption` the same value back.
    */
