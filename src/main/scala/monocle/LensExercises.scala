@@ -58,10 +58,10 @@ object LensHelper {
  *
  * Let’s take a simple case class with two fields:
  * {{{
- *   case class Address(strNumber: Int, streetName: String)
+ *   case class Address(streetNumber: Int, streetName: String)
  * }}}
  *
- * We can create a `Lens[Address, Int]` which zooms from an `Address` to its field `strNumber` by
+ * We can create a `Lens[Address, Int]` which zooms from an `Address` to its field `streetNumber` by
  * supplying a pair of functions:
  *
  *   - `get: Address => Int`
@@ -69,14 +69,14 @@ object LensHelper {
  *
  * {{{
  *   import monocle.Lens
- *   val strNumber = Lens[Address, Int](_.strNumber)(n => a => a.copy(strNumber = n))
+ *   val streetNumber = Lens[Address, Int](_.streetNumber)(n => a => a.copy(streetNumber = n))
  * }}}
  *
  * This case is really straightforward so we automated the generation of `Lenses` from case classes
  * using a macro:
  * {{{
  *   import monocle.macros.GenLens
- *   val strNumber = GenLens[Address](_.strNumber)
+ *   val streetNumber = GenLens[Address](_.streetNumber)
  * }}}
  *
  * @param name
@@ -138,7 +138,7 @@ object LensExercises extends AnyFlatSpec with Matchers with Section {
    * def updateNumber(n: Int): Future[Int] = Future.successful(n + 1)
    * }}}
    * {{{
-   *   strNumber.modifyF(updateNumber)(address)
+   *   streetNumber.modifyF(updateNumber)(address)
    *   // res9: scala.concurrent.Future[Address] = Future(<not completed>)
    * }}}
    *
